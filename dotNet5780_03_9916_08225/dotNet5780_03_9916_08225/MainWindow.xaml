@@ -20,7 +20,7 @@ VerticalAlignment="Stretch" Width="auto">
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox x:Name="cbHostList" HorizontalAlignment="Stretch" Grid.Column="0" VerticalAlignment="Stretch"/>
+            <ComboBox x:Name="cbHostList" HorizontalAlignment="Stretch" Grid.Column="0" VerticalAlignment="Stretch" SelectionChanged="cbHostList_SelectionChanged"/>
             <TextBox x:Name="tbHostName" Grid.Column="1" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="{Binding Path=HostName}" VerticalAlignment="Stretch" FontFamily="Arial Black" FontSize="16" />
         </Grid>
        
