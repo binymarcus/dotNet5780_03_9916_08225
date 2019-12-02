@@ -8,7 +8,10 @@ namespace dotNet5780_03_9916_08225
 {
     public class Host
     {
-        public string HostName;
-       public  List<HostingUnit> Units;
+        private string hostName;
+        private List<HostingUnit> units;
+
+        public string HostName { get => hostName; set => hostName = value; }
+        public List<HostingUnit> Units { get => units; set => units = value; }
     }
 }

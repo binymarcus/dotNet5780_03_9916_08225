@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNet5780_03_9916_08225"
         mc:Ignorable="d"
-        Title="MainWindow" Height="640" Width="800">
+        Title="נופש בנופש" Height="640" Width="800">
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
@@ -20,8 +20,8 @@ VerticalAlignment="Stretch" Width="auto">
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox x:Name="cbHostList" HorizontalAlignment="Stretch" Grid.Column="0" VerticalAlignment="Stretch" SelectionChanged="cbHostList_SelectionChanged"/>
-            <TextBox x:Name="tbHostName" Grid.Column="1" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="{Binding Path=HostName}" VerticalAlignment="Stretch" FontFamily="Arial Black" FontSize="16" />
+            <ComboBox x:Name="cbHostList" HorizontalAlignment="Stretch" Grid.Column="0" VerticalAlignment="Stretch" SelectionChanged="cbHostList_SelectionChanged" FontFamily="Segoe UI Black" FontSize="22" FontWeight="Bold"/>
+            <TextBox x:Name="tbHostName" Grid.Column="1" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="{Binding Path=HostName}" VerticalAlignment="Stretch" FontFamily="Arial Black" FontSize="22" TextChanged="tbHostName_TextChanged" FontWeight="Bold" />
         </Grid>
        
     </Grid>

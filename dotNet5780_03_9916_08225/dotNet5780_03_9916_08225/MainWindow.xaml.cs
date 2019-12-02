@@ -23,26 +23,28 @@ namespace dotNet5780_03_9916_08225
         private Host currentHost;
         List<Host> hostsList = new List<Host>()
         {
-                new Host() {
+                new Host()
+                {
                             HostName = "beachHouse",
                             Units = new List<HostingUnit>()
                                 {
                                    new HostingUnit()
                                    {
                                       UnitName="surf's up duuude!",
-                                    Rooms=2,
+                                      Rooms=2,
                                       IsSwimmingPool=true,
                             AllOrders=new List<DateTime>(),
-                            Uris=new List<string>(){"https://bit.ly/2Y2LaMU","https://bit.ly/34FXGnQ"}
-
-                        },
+                            Uris=new List<string>(){ "https://baliretreats-a1ca.kxcdn.com/wp-content/uploads/2017/06/beachhouse-slide1.jpg",
+                                "https://cwimages.imgix.net/resorts/C-Scape.jpg" }
+                                   },
                         new HostingUnit()
                         {
                             UnitName="white sands resort",
                             Rooms=2,
                             IsSwimmingPool=false,
                             AllOrders=new List<DateTime>(),
-                            Uris=new List<string>(){ "https://bit.ly/2OCHmi5","https://bit.ly/34KpTdy" }
+                            Uris=new List<string>(){ "https://www.places.co.za/crs/photolarge/67169.jpg" ,
+                            "https://cdn.architecturendesign.net/wp-content/uploads/2014/08/Beach-House-05-1.jpg"}
 
                         }
                     }
@@ -55,11 +57,11 @@ namespace dotNet5780_03_9916_08225
                                    new HostingUnit()
                                    {
                                       UnitName="the Plaza",
-                                    Rooms=2,
+                                      Rooms=2,
                                       IsSwimmingPool=false,
                             AllOrders=new List<DateTime>(),
-                            Uris=new List<string>(){ "https://bit.ly/2R8ylz7", "https://bit.ly/2OEsjoo", "https://bit.ly/2qTSO03" }
-
+                            Uris=new List<string>(){ "https://cdn.architecturendesign.net/wp-content/uploads/2014/08/Beach-House-17-0.jpg",
+                            "http://undisclosable.co/wp-content/uploads/2017/03/soho_malibu_014_copy@2x.jpg"}
                         },
                         new HostingUnit()
                         {
@@ -67,7 +69,8 @@ namespace dotNet5780_03_9916_08225
                             Rooms=3,
                             IsSwimmingPool=true,
                             AllOrders=new List<DateTime>(),
-                            Uris=new List<string>(){ "https://bit.ly/35Wa8jx", "https://bit.ly/2R8pzkH" }
+                            Uris=new List<string>(){ "http://www.malibubeachsoberliving.org/wp-content/uploads/2016/12/BeachHouseMalibuPoolDeck.jpg",
+                            "http://www.beachhousesofbyron.com.au/wp-content/uploads/2015/07/instagram-21-1024x1024.jpg"}
 
                         }
                     }
@@ -83,7 +86,8 @@ namespace dotNet5780_03_9916_08225
                                     Rooms=1,
                                       IsSwimmingPool=false,
                             AllOrders=new List<DateTime>(),
-                            Uris=new List<string>(){ "https://bit.ly/2La5syA", "https://bit.ly/2Raxr5o"}
+                            Uris=new List<string>(){ "https://pictures.escapia.com/BEREVR/55309/8757850960.jpg",
+                            "https://www.twiddy.com/rns/unitimages.twd/j10837-rearext.jpg"}
 
                         },
                         new HostingUnit()
@@ -92,8 +96,8 @@ namespace dotNet5780_03_9916_08225
                             Rooms=3,
                             IsSwimmingPool=false,
                             AllOrders=new List<DateTime>(),
-                            Uris=new List<string>(){ "https://bit.ly/2r2pvZ7", "https://bit.ly/34IqMDe","https://bit.ly/34Er9yt" }
-
+                            Uris=new List<string>(){ "https://www.australiantraveller.com/wp-content/uploads/2012/10/Abalone-Beach-house-gallery-4.jpg",
+                            "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/La_casa_desde_la_playa.JPG/1200px-La_casa_desde_la_playa.JPG"}
                         },
                          new HostingUnit()
                         {
@@ -101,22 +105,20 @@ namespace dotNet5780_03_9916_08225
                             Rooms=3,
                             IsSwimmingPool=false,
                             AllOrders=new List<DateTime>(),
-                            Uris=new List<string>(){ "https://bit.ly/2OBalD3", "https://bit.ly/33IU03L" }
-
+                            Uris=new List<string>(){ "https://ffcp.s3.amazonaws.com/tfc/Resorts/turtleinn/dwellings/beach_house/_MGL3866-m.jpg", 
+                                "https://www.prickettproperties.com/rental_photos/gulf-shores-gulf-front-beach-house-for-rent.jpg" }
                         }
                     }
                 }
         };
-    public MainWindow()
+        public MainWindow()
         {
             InitializeComponent();
             cbHostList.ItemsSource = hostsList;
             cbHostList.DisplayMemberPath = "HostName";
             cbHostList.SelectedIndex = 0;
-
-            
         }
-
+        public Host CurrentHost { get => currentHost; set => currentHost = value; }
         private void cbHostList_SelectionChanged(object sender, SelectionChangedEventArgs
 e)
         {
@@ -125,14 +127,19 @@ e)
         private void InitializeHost(int index)
         {
             MainGrid.Children.RemoveRange(1, 3);
-            currentHost = hostsList[index];
-            UpGrid.DataContext = currentHost;
-            for (int i = 0; i < currentHost.Units.Count; i++)
+            CurrentHost = hostsList[index];
+            UpGrid.DataContext = CurrentHost;
+            for (int i = 0; i < CurrentHost.Units.Count; i++)
             {
-                HostingUnitUserControl a = new HostingUnitUserControl(currentHost.Units[i]);
+                HostingUnitUserControl a = new HostingUnitUserControl(CurrentHost.Units[i]);
                 MainGrid.Children.Add(a);
                 Grid.SetRow(a, i + 1);
             }
+        }
+
+        private void tbHostName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // why empty?
         }
     }
 }

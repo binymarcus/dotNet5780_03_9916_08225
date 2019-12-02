@@ -20,34 +20,51 @@ namespace dotNet5780_03_9916_08225
     /// </summary>
     public partial class HostingUnitUserControl : UserControl
     {
-        private Calendar MyCalendar;
+       private Calendar MyCalendar;
        private int imageIndex;
        private Viewbox vbImage;
        private Image MyImage;
-        public HostingUnit CurrentHostingUnit { get; set; }
+        private HostingUnit currentHostingUnit;
+
+        public Calendar MyCalendar1 { get => MyCalendar; set => MyCalendar = value; }
+        public int ImageIndex { get => imageIndex; set => imageIndex = value; }
+        public Viewbox VbImage { get => vbImage; set => vbImage = value; }
+        public Image MyImage1 { get => MyImage; set => MyImage = value; }
+        public HostingUnit CurrentHostingUnit { get => currentHostingUnit; set => currentHostingUnit = value; }
+
+        public HostingUnit GetCurrentHostingUnit()
+        {
+            return CurrentHostingUnit;
+        }
+
+        public void SetCurrentHostingUnit(HostingUnit value)
+        {
+            CurrentHostingUnit = value;
+        }
+
         public HostingUnitUserControl(HostingUnit hostUnit)
         {
-            vbImage = new Viewbox();
+            VbImage = new Viewbox();
             InitializeComponent();
-            this.CurrentHostingUnit = hostUnit;
+            this.SetCurrentHostingUnit(hostUnit);
             UserControlGrid.DataContext = hostUnit;
-            MyCalendar = CreateCalendar();
+            MyCalendar1 = CreateCalendar();
             vbCalendar.Child = null;
-            vbCalendar.Child = MyCalendar;
+            vbCalendar.Child = MyCalendar1;
             SetBlackOutDates();
-            imageIndex = 0;
-            vbImage.Width = 75;
-            vbImage.Height = 75;
-            vbImage.Stretch = Stretch.Fill;
-            UserControlGrid.Children.Add(vbImage);
-            Grid.SetColumn(vbImage, 2);
-            Grid.SetRow(vbImage, 0);
-            MyImage = CreateViewImage();
-            vbImage.Child = null;
-            vbImage.Child = MyImage;
-            vbImage.MouseUp += vbImage_MouseUp;
-            vbImage.MouseEnter += vbImage_MouseEnter;
-            vbImage.MouseLeave += vbImage_MouseLeave;
+            ImageIndex = 0;
+            VbImage.Width = 75;
+            VbImage.Height = 75;
+            VbImage.Stretch = Stretch.Fill;
+            UserControlGrid.Children.Add(VbImage);
+            Grid.SetColumn(VbImage, 2);
+            Grid.SetRow(VbImage, 0);
+            MyImage1 = CreateViewImage();
+            VbImage.Child = null;
+            VbImage.Child = MyImage1;
+            VbImage.MouseUp += vbImage_MouseUp;
+            VbImage.MouseEnter += vbImage_MouseEnter;
+            VbImage.MouseLeave += vbImage_MouseLeave;
 
         }
         private Image CreateViewImage()
@@ -55,7 +72,7 @@ namespace dotNet5780_03_9916_08225
             Image dynamicImage = new Image();
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.UriSource = new Uri(@CurrentHostingUnit.Uris[imageIndex]);
+            bitmap.UriSource = new Uri(GetCurrentHostingUnit().Uris[ImageIndex]);
             bitmap.EndInit();
             // Set Image.Source
             dynamicImage.Source = bitmap;
@@ -64,21 +81,21 @@ namespace dotNet5780_03_9916_08225
         }
         private void vbImage_MouseLeave(object sender, MouseEventArgs e)
         {
-            vbImage.Width = 85;
-            vbImage.Height = 85;
+            VbImage.Width = 85;
+            VbImage.Height = 85;
         }
         private void vbImage_MouseEnter(object sender, MouseEventArgs e)
         {
-            vbImage.Width = this.Width / 3;
-            vbImage.Height = this.Height;
+            VbImage.Width = this.Width / 3;
+            VbImage.Height = this.Height;
         }
         private void vbImage_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            vbImage.Child = null;
-            imageIndex =
-           (imageIndex + CurrentHostingUnit.Uris.Count - 1) % CurrentHostingUnit.Uris.Count;
-            MyImage = CreateViewImage();
-            vbImage.Child = MyImage;
+            VbImage.Child = null;
+            ImageIndex =
+           (ImageIndex + GetCurrentHostingUnit().Uris.Count - 1) % GetCurrentHostingUnit().Uris.Count;
+            MyImage1 = CreateViewImage();
+            VbImage.Child = MyImage1;
         }
         private Calendar CreateCalendar()
         {
@@ -91,9 +108,9 @@ namespace dotNet5780_03_9916_08225
         }
         private void SetBlackOutDates()
         {
-            foreach (DateTime date in CurrentHostingUnit.AllOrders)
+            foreach (DateTime date in GetCurrentHostingUnit().AllOrders)
             {
-                MyCalendar.BlackoutDates.Add(new CalendarDateRange(date));
+                MyCalendar1.BlackoutDates.Add(new CalendarDateRange(date));
             }
         }
 
@@ -106,10 +123,10 @@ namespace dotNet5780_03_9916_08225
 
         private void btOrder_Click(object sender, RoutedEventArgs e)
         {
-            List<DateTime> myList = MyCalendar.SelectedDates.ToList();
-            MyCalendar = CreateCalendar();
+            List<DateTime> myList = MyCalendar1.SelectedDates.ToList();
+            MyCalendar1 = CreateCalendar();
             vbCalendar.Child = null;
-            vbCalendar.Child = MyCalendar;
+            vbCalendar.Child = MyCalendar1;
             addCurrentList(myList);
             SetBlackOutDates();
         }
@@ -117,10 +134,18 @@ namespace dotNet5780_03_9916_08225
         {
             foreach (DateTime d in tList)
             {
-                CurrentHostingUnit.AllOrders.Add(d);
+                GetCurrentHostingUnit().AllOrders.Add(d);
             }
         }
 
-       
+        private void tbUnitName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void IsSwimigPool_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
