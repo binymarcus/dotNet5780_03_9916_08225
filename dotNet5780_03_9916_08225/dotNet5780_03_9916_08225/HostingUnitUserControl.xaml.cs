@@ -25,23 +25,42 @@ namespace dotNet5780_03_9916_08225
        private Viewbox vbImage;
        private Image MyImage;
         private HostingUnit currentHostingUnit;
-
+        /// <summary>
+        /// basic gettr and setter
+        /// </summary>
         public Calendar MyCalendar1 { get => MyCalendar; set => MyCalendar = value; }
+        /// <summary>
+        /// basic gettr and setter
+        /// </summary>
         public int ImageIndex { get => imageIndex; set => imageIndex = value; }
+        /// <summary>
+        /// basic gettr and setter
+        /// </summary>
         public Viewbox VbImage { get => vbImage; set => vbImage = value; }
-        public Image MyImage1 { get => MyImage; set => MyImage = value; }
+        /// <summary>
+        /// basic gettr and setter
+        /// </summary>
+        public Image MyImage1 { get => MyImage; set => MyImage = value; }\        /// <summary>
+        /// basic gettr and setter
+        /// </summary>
         public HostingUnit CurrentHostingUnit { get => currentHostingUnit; set => currentHostingUnit = value; }
-
+        //getter fot eh unit
         public HostingUnit GetCurrentHostingUnit()
         {
             return CurrentHostingUnit;
         }
-
+        /// <summary>
+        /// sets the current hosting unit
+        /// </summary>
+        /// <param name="value"></param>
         public void SetCurrentHostingUnit(HostingUnit value)
         {
             CurrentHostingUnit = value;
         }
-
+        /// <summary>
+        /// cunstructor with a unit, also sets everything
+        /// </summary>
+        /// <param name="hostUnit"></param>
         public HostingUnitUserControl(HostingUnit hostUnit)
         {
             VbImage = new Viewbox();
@@ -67,6 +86,10 @@ namespace dotNet5780_03_9916_08225
             VbImage.MouseLeave += vbImage_MouseLeave;
 
         }
+        /// <summary>
+        /// creates the image that we view
+        /// </summary>
+        /// <returns></returns>
         private Image CreateViewImage()
         {
             Image dynamicImage = new Image();
@@ -79,16 +102,31 @@ namespace dotNet5780_03_9916_08225
             // Add Image to Window
             return dynamicImage;
         }
+        /// <summary>
+        /// decides what happens when the mouse leaves the picture
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void vbImage_MouseLeave(object sender, MouseEventArgs e)
         {
             VbImage.Width = 85;
             VbImage.Height = 85;
         }
+        /// <summary>
+        /// sets the function that happens when the mosue enters the oicture
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void vbImage_MouseEnter(object sender, MouseEventArgs e)
         {
             VbImage.Width = this.Width / 3;
             VbImage.Height = this.Height;
         }
+        /// <summary>
+        /// sets the mouse up button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void vbImage_MouseUp(object sender, MouseButtonEventArgs e)
         {
             VbImage.Child = null;
@@ -97,6 +135,10 @@ namespace dotNet5780_03_9916_08225
             MyImage1 = CreateViewImage();
             VbImage.Child = MyImage1;
         }
+        /// <summary>
+        /// creates the calender for the screen
+        /// </summary>
+        /// <returns></returns>
         private Calendar CreateCalendar()
         {
             Calendar MonthlyCalendar = new Calendar();
@@ -106,6 +148,9 @@ namespace dotNet5780_03_9916_08225
             MonthlyCalendar.IsTodayHighlighted = true;
             return MonthlyCalendar;
         }
+        /// <summary>
+        /// sets the dates whwne a client chooses
+        /// </summary>
         private void SetBlackOutDates()
         {
             foreach (DateTime date in GetCurrentHostingUnit().AllOrders)
@@ -114,13 +159,20 @@ namespace dotNet5780_03_9916_08225
             }
         }
 
-
+        /// <summary>
+        /// default constructor
+        /// </summary>
         public HostingUnitUserControl()
         {
 
             InitializeComponent();
         }
 
+        /// <summary>
+        /// sets the click button on mouse
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btOrder_Click(object sender, RoutedEventArgs e)
         {
             List<DateTime> myList = MyCalendar1.SelectedDates.ToList();
@@ -130,6 +182,10 @@ namespace dotNet5780_03_9916_08225
             addCurrentList(myList);
             SetBlackOutDates();
         }
+        /// <summary>
+        /// adds a host to the list or an order
+        /// </summary>
+        /// <param name="tList"></param>
         private void addCurrentList(List<DateTime> tList)
         {
             foreach (DateTime d in tList)
@@ -137,12 +193,20 @@ namespace dotNet5780_03_9916_08225
                 GetCurrentHostingUnit().AllOrders.Add(d);
             }
         }
-
+        /// <summary>
+        /// controls the text change
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tbUnitName_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
-
+        /// <summary>
+        /// function to check the botton of the swimming pool
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void IsSwimigPool_Checked(object sender, RoutedEventArgs e)
         {
 

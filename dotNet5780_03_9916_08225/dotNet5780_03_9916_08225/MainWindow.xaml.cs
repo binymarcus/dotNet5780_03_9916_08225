@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+/*binyamin marcus 212329916 moshe zuckerbrat */
 namespace dotNet5780_03_9916_08225
 {
     /// <summary>
@@ -20,12 +20,12 @@ namespace dotNet5780_03_9916_08225
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Host currentHost;
-        List<Host> hostsList = new List<Host>()
+        private Host currentHost;// variable for use of our current host. only used in this class
+        List<Host> hostsList = new List<Host>()// list of hosts to be projected on main window
         {
                 new Host()
                 {
-                            HostName = "beachHouse",
+                            HostName = "beachHouse",// arbitrary name
                             Units = new List<HostingUnit>()
                                 {
                                    new HostingUnit()
@@ -35,7 +35,7 @@ namespace dotNet5780_03_9916_08225
                                       IsSwimmingPool=true,
                             AllOrders=new List<DateTime>(),
                             Uris=new List<string>(){ "https://baliretreats-a1ca.kxcdn.com/wp-content/uploads/2017/06/beachhouse-slide1.jpg",
-                                "https://cwimages.imgix.net/resorts/C-Scape.jpg" }
+                                "https://cwimages.imgix.net/resorts/C-Scape.jpg" }//th picturs for the main window
                                    },
                         new HostingUnit()
                         {
@@ -44,7 +44,7 @@ namespace dotNet5780_03_9916_08225
                             IsSwimmingPool=false,
                             AllOrders=new List<DateTime>(),
                             Uris=new List<string>(){ "https://www.places.co.za/crs/photolarge/67169.jpg" ,
-                            "https://cdn.architecturendesign.net/wp-content/uploads/2014/08/Beach-House-05-1.jpg"}
+                            "https://cdn.architecturendesign.net/wp-content/uploads/2014/08/Beach-House-05-1.jpg"}// the pictrues
 
                         }
                     }
@@ -61,7 +61,7 @@ namespace dotNet5780_03_9916_08225
                                       IsSwimmingPool=false,
                             AllOrders=new List<DateTime>(),
                             Uris=new List<string>(){ "https://cdn.architecturendesign.net/wp-content/uploads/2014/08/Beach-House-17-0.jpg",
-                            "http://undisclosable.co/wp-content/uploads/2017/03/soho_malibu_014_copy@2x.jpg"}
+                            "http://undisclosable.co/wp-content/uploads/2017/03/soho_malibu_014_copy@2x.jpg"}//the pictures
                         },
                         new HostingUnit()
                         {
@@ -70,7 +70,7 @@ namespace dotNet5780_03_9916_08225
                             IsSwimmingPool=true,
                             AllOrders=new List<DateTime>(),
                             Uris=new List<string>(){ "http://www.malibubeachsoberliving.org/wp-content/uploads/2016/12/BeachHouseMalibuPoolDeck.jpg",
-                            "http://www.beachhousesofbyron.com.au/wp-content/uploads/2015/07/instagram-21-1024x1024.jpg"}
+                            "http://www.beachhousesofbyron.com.au/wp-content/uploads/2015/07/instagram-21-1024x1024.jpg"}// the pictures
 
                         }
                     }
@@ -111,6 +111,9 @@ namespace dotNet5780_03_9916_08225
                     }
                 }
         };
+        /// <summary>
+        /// default constructor for the class main window, which intializes the veiwing screen
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -118,12 +121,24 @@ namespace dotNet5780_03_9916_08225
             cbHostList.DisplayMemberPath = "HostName";
             cbHostList.SelectedIndex = 0;
         }
+        /// <summary>
+        /// getter and setter function for the curretn host
+        /// </summary>
         public Host CurrentHost { get => currentHost; set => currentHost = value; }
+        /// <summary>
+        /// ataumatic creation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbHostList_SelectionChanged(object sender, SelectionChangedEventArgs
 e)
         {
             InitializeHost(cbHostList.SelectedIndex);
         }
+        /// <summary>
+        /// function to create the host and to set him in the program
+        /// </summary>
+        /// <param name="index"></param>
         private void InitializeHost(int index)
         {
             MainGrid.Children.RemoveRange(1, 3);
@@ -136,10 +151,13 @@ e)
                 Grid.SetRow(a, i + 1);
             }
         }
-
+        /// <summary>
+        /// a function which contrils when the text of the host name is changes. is created automatically and therfore emopty
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tbHostName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // why empty?
         }
     }
 }
